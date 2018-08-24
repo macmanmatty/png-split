@@ -215,6 +215,18 @@ yHBox.getChildren().add(enterY);
 		double height=image.getHeight();
 		int xCut=(int)(width/xPixles);
 		int yCut=(int)(height/yPixles);
+		if (width%xPixles!=0) {
+			 xCut=(int)(width/xPixles)+1;
+
+			
+		}
+		if (height%yPixles!=0) {
+			 yCut=(int)(height/yPixles)+1;
+
+			
+		}
+		
+		
 		ImageView imageView= new ImageView(image);
 		 SnapshotParameters sp = new SnapshotParameters();
 
@@ -234,7 +246,7 @@ yHBox.getChildren().add(enterY);
 				    BufferedImage bImage = SwingFXUtils.fromFXImage(image2, null);
 				    try {
 				    	
-				   String path="/image"+countx+county+".png";
+				   String path="/imagex"+countx+"y"+county+".png";
 					   path=destnationPath+path;
 					   
 					  

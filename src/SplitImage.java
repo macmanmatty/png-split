@@ -202,7 +202,12 @@ yHBox.getChildren().add(enterY);
 	public void split(File file) {
 		String imagePath=file.getAbsolutePath();
 		System.out.println(imagePath);
-		
+		String extension = "";
+
+		int i = imagePath.lastIndexOf('.');
+		if (i > 0) {
+		    extension = imagePath.substring(i);
+		}
 		
 	
 		xPixles=Integer.parseInt(enterX.getText());
@@ -246,7 +251,7 @@ yHBox.getChildren().add(enterY);
 				    BufferedImage bImage = SwingFXUtils.fromFXImage(image2, null);
 				    try {
 				    	
-				   String path="/imagex"+countx+"y"+county+".png";
+				   String path="/imagex"+countx+"y"+county+extension;
 					   path=destnationPath+path;
 					   
 					  

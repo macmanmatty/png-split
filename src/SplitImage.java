@@ -38,15 +38,23 @@ public class SplitImage {
 	File file;
 	
 	String destnationPath="";
-	String fileSource;
+	String fileSource="";
 	CheckBox saveTransparency;
-	boolean transparency;
+	boolean transparency=true;
 	
 	
 	FileChooser fileChooser = new FileChooser();
 	DirectoryChooser dChooser = new DirectoryChooser();
-	TextField enterX;
-	TextField enterY;
+	TextField enterX= new TextField();
+	TextField enterY= new TextField();
+	TextField enterName= new TextField();
+	Label imageHeightLabel;
+	Label imageWidthLabel;
+	String imageWidth="0";
+	String imageHeight="0";
+	
+	
+	
 
 	
 	
@@ -55,6 +63,7 @@ public class SplitImage {
 		stage.setMinHeight(400);
 		stage.setMinWidth(400);
 		saveTransparency=new CheckBox();
+		saveTransparency.setSelected(true);
 		
 		selectImage= new Button ("Select Image");
 		selectImage.setOnAction(
@@ -63,6 +72,18 @@ public class SplitImage {
             public void handle( final ActionEvent e) {
               file = fileChooser.showOpenDialog(stage);
                 fileSource=file.getAbsolutePath();
+
+                String imagePath=file.getAbsolutePath();
+        	
+        	
+
+        		
+        	
+        		Image image= new Image("file:"+imagePath);
+        		imageWidth=Double.toString(image.getWidth());
+        		imageHeight=Double.toString(image.getHeight());
+        		
+        		
             	showWindow(null);
 
 
@@ -121,15 +142,19 @@ public class SplitImage {
 	
 	public void showWindow(Label text){
 		Label label= new Label("Select Image To Split" );
+		Label labelImagex= new Label(" Image Height Pixels: "+imageHeight );
+		Label labelImagey= new Label("Image Width Pixils: "+imageWidth );
 		Label labelx= new Label("xPixels" );
 		Label labely= new Label("yPixels" );
+		Label name= new Label("Image  Prefix Name");
+		
 		Label check= new Label("Save Image Transparency?");
 		Label output = new Label("Output Location: "+destnationPath);
 		Label input = new Label("Image To Split: "+fileSource);
 
+	
+		HBox nameBox= new HBox(name , enterName);
 		
-		enterY=new TextField();
-		enterX=new TextField();
 		enterY.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
@@ -148,8 +173,8 @@ public class SplitImage {
 		        }
 		    }
 		});
-		enterY.setText("32");
-		enterX.setText("32");
+		enterY.setText(Integer.toString(yPixles));
+		enterX.setText(Integer.toString(xPixles));
 HBox xHBox= new HBox();
 HBox yHBox= new HBox();
 
@@ -163,9 +188,13 @@ yHBox.getChildren().add(enterY);
 		
 		VBox pane=new VBox();
 		pane.getChildren().add(label);
+		pane.getChildren().add(labelImagex);
+
+pane.getChildren().add(labelImagey);
 
 		pane.getChildren().add(xHBox);
 		pane.getChildren().add(yHBox);
+		pane.getChildren().add(nameBox);
 		pane.getChildren().add(check);
 		pane.getChildren().add(saveTransparency);
 		pane.getChildren().add(input);
@@ -203,7 +232,8 @@ yHBox.getChildren().add(enterY);
 		String imagePath=file.getAbsolutePath();
 		System.out.println(imagePath);
 		String extension = "";
-
+			String prefixName=enterName.getText();
+			
 		int i = imagePath.lastIndexOf('.');
 		if (i > 0) {
 		    extension = imagePath.substring(i);
@@ -251,7 +281,7 @@ yHBox.getChildren().add(enterY);
 				    BufferedImage bImage = SwingFXUtils.fromFXImage(image2, null);
 				    try {
 				    	
-				   String path="/imagex"+countx+"y"+county+extension;
+				   String path="/"+prefixName+"x"+countx+"y"+county+extension;
 					   path=destnationPath+path;
 					   
 					  

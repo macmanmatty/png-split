@@ -3,7 +3,7 @@ A  java program .jar that takes  a png and splits int smaller images of a specif
 
 Download:
 
-Go the releases page to download the cross platform jar for this applacation.  The jar requires java 1.8 installed+ on your computer (Windows Osx, Linux). 
+Go the releases page here https://github.com/macmanmatty/png-split/releases to download the cross platform jar for this applacation.  The jar requires java 1.8 installed+ on your computer (Windows Osx, Linux). 
 
 
 
